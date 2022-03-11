@@ -53,7 +53,7 @@ class Library:
             
             print(f'_file 1: {_file}')
             
-            if not _file or not os.path.exists(_file):
+            if not _file: #or not os.path.exists(_file):
                 _file = find_library(name)  # type: ignore
                 
                 print(f'_file 2: {_file}')
