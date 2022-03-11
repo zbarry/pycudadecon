@@ -41,15 +41,26 @@ else:
 
 class Library:
     def __init__(self, name: str):
+        print(f'Loading library: {name}...')
+        
         self.name = name
 
         _file = name
         if not _file or not os.path.exists(_file):
+            print('using find_library...')
+            
             _file = find_library(name.replace("lib", "", 1))  # type: ignore
+            
+            print(f'_file 1: {_file}')
+            
             if not _file or not os.path.exists(_file):
                 _file = find_library(name)  # type: ignore
+                
+                print(f'_file 2: {_file}')
 
         self.lib = ctypes.CDLL(_file)
+        print(f'lib: {self.lib._name}')
+        
         if not self.lib._name:
             raise FileNotFoundError(f"Unable to find library: {self.name}")
 
